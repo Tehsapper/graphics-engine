@@ -38,7 +38,7 @@ namespace LimitlessEngine {
     protected:
         T value;
 
-        constexpr UniformValueType getUniformValueType();
+        static constexpr UniformValueType getUniformValueType();
         UniformValue(const std::string& name, UniformType type, const T& value);
         friend class UniformSerializer;
 
