@@ -336,7 +336,7 @@ glm::vec3 MeshLocation::getPositionOnTriangle(const glm::vec3& a, const glm::vec
 glm::vec3 MeshLocation::getPositionOnMesh() noexcept {
     const auto& vertices = static_cast<Mesh<VertexNormalTangent>&>(*mesh).getVertices();
 
-    auto distr = std::uniform_int_distribution(0ULL, vertices.size() - 3);
+    auto distr = std::uniform_int_distribution(0UL, vertices.size() - 3);
     const auto index = distr(generator);
     return getPositionOnTriangle(vertices[index].position,
                                  vertices[index + 1].position,

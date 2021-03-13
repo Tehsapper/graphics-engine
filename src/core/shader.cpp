@@ -12,6 +12,8 @@ namespace {
     inline constexpr auto bindless_texture = "GL_ARB_bindless_texture";
     inline constexpr auto bindless_texture_define = "#define BINDLESS_TEXTURE\n";
     inline constexpr auto extension_bindless_texture = "#extension GL_ARB_bindless_texture : require\n";
+    inline constexpr auto extension_shader_storage_buffer_object = "#extension GL_ARB_shader_storage_buffer_object : require\n";
+    inline constexpr auto extension_shading_language_420pack = "#extension GL_ARB_shading_language_420pack : enable\n";
 }
 
 Shader::Shader(fs::path _path, Type _type) : path{std::move(_path)}, type{_type} {
@@ -75,6 +77,9 @@ void Shader::replaceKey(const std::string& key, const std::string& value) noexce
 
 void Shader::replaceExtensions() noexcept {
     std::string extensions;
+
+	extensions.append(extension_shader_storage_buffer_object);
+	extensions.append(extension_shading_language_420pack);
 
     if (ContextInitializer::isExtensionSupported(bindless_texture)) {
         extensions.append(extension_bindless_texture);

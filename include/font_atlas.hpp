@@ -37,6 +37,8 @@ namespace LimitlessEngine {
         auto getFontSize() { return font_size; }
 
         [[nodiscard]] const auto& getTexture() const { return texture; }
+		[[nodiscard]] const auto& getFontCharacter(char glyph) const { return chars.at(glyph); }
+		[[nodiscard]] auto getFontSize() const noexcept { return font_size; }
 
         [[nodiscard]] std::vector<TextVertex> generate(const std::string& text) const;
 

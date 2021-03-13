@@ -36,7 +36,10 @@ void NamedTexture::texStorage2DMultisample([[maybe_unused]] GLenum _target, uint
 }
 
 void NamedTexture::texImage2D(GLenum _target, GLsizei levels, GLenum internal_format, GLenum format, GLenum type, glm::uvec2 size, const void* data) const noexcept {
-    glTextureImage2DEXT(id, _target, levels, internal_format, size.x, size.y, 0, format, type, data);
+	glBindTexture(_target, id);
+	glTexImage2D(_target, levels, internal_format, size.x, size.y, 0, format, type, data);
+	// TODO: check that extension is present before attempting to use this
+	//    glTextureImage2DEXT(id, _target, levels, internal_format, size.x, size.y, 0, format, type, data);
 }
 
 void NamedTexture::texImage3D(GLenum _target, GLsizei levels, GLenum internal_format, GLenum format, GLenum type, glm::uvec3 size, const void *data) const noexcept {
