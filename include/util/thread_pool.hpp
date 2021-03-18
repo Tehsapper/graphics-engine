@@ -8,14 +8,14 @@
 #include <queue>
 #include <mutex>
 
-namespace GraphicsEngine {
+namespace LimitlessEngine {
     class ThreadPool {
     protected:
         std::queue<std::function<void()>> tasks;
         std::condition_variable condition;
         std::vector<std::thread> threads;
         std::mutex mutex;
-        bool stop {};
+        bool stop{};
         ThreadPool() = default;
     public:
         explicit ThreadPool(uint32_t pool_size);

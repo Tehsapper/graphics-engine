@@ -18,8 +18,9 @@
 #include <asset_loader.hpp>
 #include <text_instance.hpp>
 #include <material_system/custom_material_builder.hpp>
+#include <util/bytebuffer.hpp>
 
-using namespace GraphicsEngine;
+using namespace LimitlessEngine;
 
 class Game : public MouseMoveObserver, public KeyObserver {
 private:
@@ -70,11 +71,12 @@ public:
         scene.add<ElementaryInstance>(assets.models.at("sphere"), assets.materials.at("material5"), glm::vec3{ 8.0f, 0.0f, 0.0f });
         scene.add<ElementaryInstance>(assets.models.at("sphere"), assets.materials.at("material6"), glm::vec3{ 10.0f, 0.0f, 0.0f });
 
-        scene.add(new TextInstance("test", {400.0f, 400.0f}, {1.0f, 1.0f}, {1.5f, 3.8f, 2.4f, 1.f}, assets.fonts.at("nunito"), context));
+        auto test_text = new TextInstance("test", {400.0f, 400.0f}, {1.0f, 1.0f}, {1.5f, 3.8f, 2.4f, 1.f}, assets.fonts.at("nunito"), context);
+        scene.add(test_text);
 
         scene.lighting.point_lights.emplace_back(glm::vec4{8.0f, 0.0f, 2.0f, 1.0f}, glm::vec4{8.3f, 8.1f, 8.7f, 1.5f}, 8.0f);
 
-      CustomMaterialBuilder builder;
+        CustomMaterialBuilder builder;
 
         builder.create("custom")
                            .setFragmentCode("uv.y -= 0.1;\n"
@@ -115,7 +117,7 @@ public:
                 .build();
 
         scene.add<EffectInstance>(effect, glm::vec3{-1.f, -1.f, -1.f})
-            .setPosition(glm::vec3{-3.f, -3.f, -3.f});
+             .setPosition(glm::vec3{-3.f, -3.f, -3.f});
 
         scene.lighting.point_lights.emplace_back(glm::vec4{8.0f, 0.0f, 2.0f, 1.0f}, glm::vec4{8.3f, 8.1f, 8.7f, 10.5f}, 8.0f);
         scene.lighting.point_lights.emplace_back(glm::vec4{12.0f, 0.0f, 2.0f, 1.0f}, glm::vec4{2.3f, 7.1f, 8.7f, 10.5f}, 3.0f);
@@ -205,7 +207,7 @@ public:
     }
 
     void loadingSceneConcurrently() {
-        static AssetLoader loader{context};
+        static AssetManager loader{context};
 
         loader.loadModel("bob", ASSETS_DIR "models/boblamp/boblampclean.md5mesh");
         loader.loadModel("backpack", ASSETS_DIR "models/backpack/backpack.obj", true);
@@ -285,7 +287,7 @@ public:
 
             context.swapBuffers();
         }
-        loader.delayed_work();
+        loader.delayed_job();
     }
 
     void onMouseMove(glm::dvec2 pos) override {
