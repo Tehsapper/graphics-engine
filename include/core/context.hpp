@@ -57,6 +57,7 @@ namespace LimitlessEngine {
         void setAspectRatio(glm::uvec2 ratio) noexcept;
         void setFullscreen(bool value) noexcept;
         void setWindowPos(glm::uvec2 pos) const noexcept;
+		void setScissorTest(glm::vec2 pos, glm::vec2 size);
         bool shouldClose() const noexcept;
 
         void iconify() const noexcept;

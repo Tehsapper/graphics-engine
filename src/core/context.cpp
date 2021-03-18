@@ -182,3 +182,7 @@ void Context::setCursor(GLFWimage image) const {
 
     glfwSetCursor(window, cursor);
 }
+
+void Context::setScissorTest(glm::vec2 pos, glm::vec2 _size) {
+	glScissor(pos.x, pos.y, _size.x, _size.y);
+}

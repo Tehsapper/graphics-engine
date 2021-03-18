@@ -41,7 +41,8 @@ namespace LimitlessEngine {
     enum class Enable {
         DepthTest = GL_DEPTH_TEST,
         Blending = GL_BLEND,
-        ProgramPointSize = GL_PROGRAM_POINT_SIZE
+        ProgramPointSize = GL_PROGRAM_POINT_SIZE,
+        ScissorTest = GL_SCISSOR_TEST
     };
 
     enum class BlendFactor {
